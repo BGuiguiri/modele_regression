@@ -1,24 +1,16 @@
-
 import streamlit as st
-import pickle
-import numpy as np
-from sklearn.linear_model import LinearRegression
-# Charger le modèle sérialisé
-with open('modele_regression.pkl', 'rb') as file:
-    model = pickle.load(file)
 
 # Titre de l'application
-st.title("Prédiction avec Régression Linéaire")
+st.title("Table de Multiplication")
 
-# Entrées utilisateur
-st.header("Entrez deux caractéristiques")
-feature1 = st.number_input("Caractéristique 1", value=0.0, step=1.0)
-feature2 = st.number_input("Caractéristique 2", value=0.0, step=1.0)
+# Description
+st.write("Choisissez un nombre pour afficher sa table de multiplication de 1 à 10.")
 
-# Préparer les données pour la prédiction
-input_data = np.array([[feature1, feature2]])
+# Entrée utilisateur
+number = st.number_input("Entrez un nombre", min_value=1, max_value=100, value=1, step=1)
 
-# Faire une prédiction
-if st.button("Prédire"):
-    prediction = model.predict(input_data)
-    st.success(f"Prédiction : {prediction[0]:.2f}")
+# Afficher la table de multiplication
+st.header(f"Table de multiplication de {number}")
+for i in range(1, 11):
+    result = number * i
+    st.write(f"{number} × {i} = {result}")
